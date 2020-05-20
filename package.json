@@ -1,0 +1,12 @@
+{
+  "name": "poor-mans-litmus",
+  "version": "1.0.0",
+  "description": "Litmus for those who don't want to pay for it.",
+  "main": "index.js",
+  "author": "kodumen",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^3.1.0",
+    "puppeteer-core": "^3.1.0"
+  }
+}
