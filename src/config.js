@@ -10,5 +10,9 @@ module.exports = {
   gmail: {
     email: process.env.GMAIL_EMAIL,
     password: process.env.GMAIL_PASSWORD,
+  },
+  pusher: {
+    key: process.env.PUSHER_KEY,
+    cluster: process.env.PUSHER_CLUSTER,
   }
 }
