@@ -14,5 +14,8 @@ module.exports = {
   pusher: {
     key: process.env.PUSHER_KEY,
     cluster: process.env.PUSHER_CLUSTER,
+  },
+  screenshots: {
+    baseUrl: process.env.SCREENSHOTS_BASE_URL,
   }
 }

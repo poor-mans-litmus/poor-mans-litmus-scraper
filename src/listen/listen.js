@@ -1,4 +1,5 @@
 const Pusher = require('pusher-js')
+const { upload } = require('../utils/utils')
 
 const handlers = []
 
@@ -22,8 +23,9 @@ module.exports = function (browser, config) {
     cluster: config.pusher.cluster,
   })
 
-  let channel = pusher.subscribe('my-channel')
-  channel.bind('email-sent', async data => {
+  let channel = pusher.subscribe('crawlers')
+  channel.bind('App\\Events\\MailSent', async data => {
+
     console.log('Received event', data)
 
     for (let i = 0; i < handlers.length; i++) {
@@ -31,7 +33,12 @@ module.exports = function (browser, config) {
 
       if (handler.canHandle(data)) {
         console.log('Event is being handled by', handler)
-        await handler.handle(browser, config, data)
+
+        let result = await handler.handle(browser, config, data)
+
+        if (result) {
+          upload(data.subject, result)
+        }
       }
     }
   })
