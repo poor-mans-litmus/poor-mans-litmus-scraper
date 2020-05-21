@@ -1,42 +1,20 @@
+require('dotenv').config()
+
+const config = require('./src/config')
 const Puppeteer = require('puppeteer')
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
+const login = require('./src/login/login')
 
 async function main() {
-  const chrome = await browser()
+  console.log(config)
 
-  // login to yahoo
-  const page = await chrome.newPage()
-  await page.goto('https://mail.yahoo.com/b/')
-  await page.waitForSelector('#login-username')
-  await page.focus('#login-username')
+  const chrome = await browser(config.browser)
 
-  readline.question('Yahoo! username: ', async answer => {
-    await page.keyboard.type(answer)
-    await page.click('#login-signin')
-  })
-
-  await page.waitForSelector('#login-passwd', { timeout: 0 })
-  await page.focus('#login-passwd')
-
-  readline.question('Yahoo! password: ', async answer => {
-    await page.keyboard.type(answer)
-    await page.click('#login-signin')
-    readline.close()
-  })
-
-  await page.waitForSelector('#messageListContainer')
-  console.log('Successful login')
-  await page.screenshot({
-    path: 'screenshots/test.jpg',
-    fullPage: true,
-  })
+  await login(chrome, config)
 }
 
-async function browser() {
+async function browser(browserConfig) {
   return Puppeteer.launch({
+    headless: browserConfig.headless,
     defaultViewport: {
       width: 1024,
       height: 768,
