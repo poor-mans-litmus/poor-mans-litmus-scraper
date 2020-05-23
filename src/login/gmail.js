@@ -2,7 +2,7 @@ module.exports = async function (browser, config) {
   const page = await browser.newPage()
 
   // Attempt to access the basic Gmail site.
-  // This login flow attempts that the account
+  // This login flow assumes that the account
   // already completed the following:
   // - Accessed the Basic version of Gmail once.
   // - Confirmed the mobile number.
