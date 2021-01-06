@@ -6,7 +6,7 @@
   "author": "kodumen",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "form-data": "^3.0.0",
     "puppeteer": "^3.1.0",
